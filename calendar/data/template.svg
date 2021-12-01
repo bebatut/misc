@@ -25,9 +25,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="1.4"
-     inkscape:cx="399.71603"
-     inkscape:cy="360.12915"
+     inkscape:zoom="0.7"
+     inkscape:cx="537.71519"
+     inkscape:cy="649.31695"
      inkscape:document-units="mm"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -50,7 +50,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -59,19 +59,12 @@
      inkscape:groupmode="layer"
      id="layer1">
     <rect
-       style="opacity:1;fill:#646464;fill-opacity:1;stroke:#646464;stroke-width:10;stroke-linecap:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-       id="rect918-7"
-       width="199.72844"
-       height="55.73373"
-       x="5.2715559"
-       y="236.26627" />
-    <rect
-       style="opacity:1;fill:#646464;fill-opacity:1;stroke:#646464;stroke-width:10;stroke-linecap:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       style="opacity:1;fill:#646464;fill-opacity:1;stroke:#646464;stroke-width:11.26901054;stroke-linecap:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
        id="rect918"
-       width="199.19391"
-       height="49.853806"
-       x="5"
-       y="5" />
+       width="198.73099"
+       height="285.73099"
+       x="5.6345062"
+       y="5.6345062" />
     <rect
        style="opacity:1;fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:0.06196425;stroke-linecap:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
        id="rect815-3"
@@ -122,39 +115,32 @@
            style="fill:#ffffff;fill-opacity:1" /></flowRegion><flowPara
          id="flowPara838-3-9"
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Amatemora;-inkscape-font-specification:Amatemora;text-align:center;text-anchor:middle">Semaine %week%</flowPara></flowRoot>    <rect
-       style="opacity:1;fill:none;fill-opacity:1;stroke:#646464;stroke-width:10;stroke-linecap:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-       id="rect815-1"
-       width="200"
-       height="287"
-       x="5"
-       y="5" />
-    <rect
        style="opacity:1;fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:0.06196425;stroke-linecap:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
        id="rect815-3-0"
        width="27.000002"
        height="35.074108"
-       x="37.104954"
+       x="37.104958"
        y="249.07809" />
     <rect
        style="opacity:1;fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:0.06196425;stroke-linecap:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
        id="rect815-3-9"
        width="27.000002"
        height="35.074108"
-       x="64.320938"
+       x="64.320946"
        y="249.07809" />
     <rect
        style="opacity:1;fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:0.06196425;stroke-linecap:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
        id="rect815-3-3"
        width="27.000002"
        height="35.074108"
-       x="91.536926"
+       x="91.536934"
        y="249.07809" />
     <rect
        style="opacity:1;fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:0.06196425;stroke-linecap:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
        id="rect815-3-6"
        width="27.000002"
        height="35.074108"
-       x="118.75291"
+       x="118.75292"
        y="249.07809" />
     <rect
        style="opacity:1;fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:0.06196425;stroke-linecap:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
@@ -168,7 +154,7 @@
        id="rect815-3-61"
        width="27.000002"
        height="35.074108"
-       x="173.18489"
+       x="173.18491"
        y="249.07809" />
     <flowRoot
        xml:space="preserve"
