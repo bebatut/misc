@@ -4,16 +4,49 @@
 import argparse
 import pandas as pd
 from pathlib import Path
+from pikepdf import Pdf
+from subprocess import Popen
 
 
-def create_week_svg(week, template, output_dp):
-    '''
-    Create week SVG
-    '''
+def waitForResponse(x):
+    ''''''
+    out, err = x.communicate()
+    if x.returncode < 0:
+        r = "Popen returncode: " + str(x.returncode)
+        raise OSError(r)
+
+
+def get_day_number(day, group):
+    ''''''
+    v = group.loc[group.day == day, 'n']
+    if len(v) == 1:
+        return int(v)
+    else:
+        return ''
+
+
+def create_week(group, w):
+    '''Create week dictionary'''
+    week = {
+        'id': w,
+        'month': ' - '.join(list(pd.unique(group.month))),
+        'mon': get_day_number('Monday', group),
+        'tue': get_day_number('Tuesday', group),
+        'wed': get_day_number('Wednesday', group),
+        'thu': get_day_number('Thursday', group),
+        'fri': get_day_number('Friday', group),
+        'sat': get_day_number('Saturday', group),
+        'sun': get_day_number('Sunday', group)
+    }
+    return week
+
+
+def create_week_files(week, template, output_dp, pdf):
+    '''Create week SVG'''
+    # replace content in template
     content = template
     content = content.replace("%month%", week['month'])
     content = content.replace("%week%", "%s" % week['id'])
-    print(week['mon'])
     content = content.replace("%mon%", "%s" % week['mon'])
     content = content.replace("%tue%", "%s" % week['tue'])
     content = content.replace("%wed%", "%s" % week['wed'])
@@ -21,10 +54,23 @@ def create_week_svg(week, template, output_dp):
     content = content.replace("%fri%", "%s" % week['fri'])
     content = content.replace("%sat%", "%s" % week['sat'])
     content = content.replace("%sun%", "%s" % week['sun'])
-
-    week_fp = Path(output_dp) / Path("%s.svg" % week['id'])
-    with open(week_fp, 'w') as week_f:
+    # generate svg file
+    svg_fp = Path(output_dp) / Path("%s.svg" % week['id'])
+    pdf_fp = Path(output_dp) / Path("%s.pdf" % week['id'])
+    with open(svg_fp, 'w') as week_f:
         week_f.write(content)
+    # generate pdf file
+    x = Popen([
+        '/usr/bin/inkscape',
+        svg_fp,
+        '--export-pdf=%s' % pdf_fp])
+    try:
+        waitForResponse(x)
+    except OSError:
+        return False
+    # add pdf
+    src = Pdf.open(pdf_fp)
+    pdf.pages.extend(src.pages)
 
 
 if __name__ == '__main__':
@@ -48,50 +94,24 @@ if __name__ == '__main__':
             month=lambda x: x['date'].dt.strftime('%B'),
             n=lambda x: x['date'].dt.strftime("%d")
         ))
-    print(date_df)
 
+
+    # create week svg
     week_group = date_df.groupby(["week"])
+    pdf = Pdf.new()
     for w, group in week_group:
-        print(w)
-        print(group)
         if w == 52:
-            continue
+            # december
             group1 = group[group.month == 'December']
-            week = {
-                'id': w,
-                'month': 'December',
-                'mon': group1[group1.day == 'Monday'].n,
-                'tue': group1[group1.day == 'Tuesday'].n,
-                'wed': group1[group1.day == 'Wednesday'].n,
-                'thu': group1[group1.day == 'Thursday'].n,
-                'fri': group1[group1.day == 'Friday'].n,
-                'sat': group1[group1.day == 'Saturday'].n,
-                'sun': group1[group1.day == 'Sunday'].n
-            }
-            create_week_svg(week, template)
+            week = create_week(group1, 52)
+            create_week_files(week, template, args.output, pdf)
+            # january
             group1 = group[group.month == 'January']
-            week = {
-                'id': w,
-                'month': 'January',
-                'mon': group1[group1.day == 'Monday'].n,
-                'tue': group1[group1.day == 'Tuesday'].n,
-                'wed': group1[group1.day == 'Wednesday'].n,
-                'thu': group1[group1.day == 'Thursday'].n,
-                'fri': group1[group1.day == 'Friday'].n,
-                'sat': group1[group1.day == 'Saturday'].n,
-                'sun': group1[group1.day == 'Sunday'].n
-            }
-            create_week_svg(week, template)
+            week = create_week(group1, 0)
+            create_week_files(week, template, args.output, pdf)
         else:
-            week = {
-                'id': w,
-                'month': ' - '.join(list(pd.unique(group.month))),
-                'mon': int(group.loc[group.day == 'Monday', 'n']),
-                'tue': int(group.loc[group.day == 'Tuesday', 'n']),
-                'wed': int(group.loc[group.day == 'Wednesday', 'n']),
-                'thu': int(group.loc[group.day == 'Thursday', 'n']),
-                'fri': int(group.loc[group.day == 'Friday', 'n']),
-                'sat': int(group.loc[group.day == 'Saturday', 'n']),
-                'sun': int(group.loc[group.day == 'Sunday', 'n'])
-            }
-            create_week_svg(week, template, args.output)
+            week = create_week(group, w)
+            create_week_files(week, template, args.output, pdf)
+
+    # generate final PDF
+    pdf.save(Path(args.output) / Path('calendar.pdf'))

@@ -3,6 +3,7 @@ Weekly calendar creation
 
 # Requirements
 
+- Inkscape
 - With conda
 
     1. Install [conda](https://docs.conda.io/en/latest/miniconda.html)
@@ -22,6 +23,7 @@ Weekly calendar creation
 
     - Python >3
     - pandas
+    - pikepdf
 
 # Generate the calendar
 
