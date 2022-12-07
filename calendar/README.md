@@ -31,7 +31,7 @@ Weekly calendar creation
 
     It must contain text with
     - `%month%"` for the month placeholder
-    - `"%week%` for the week number placeholder
+    - `%week%` for the week number placeholder
     - `%mon%` for Monday number placeholder
     - `%tue%` for Tuesday number placeholder
     - `%wed%` for Wednesday number placeholder
